@@ -30,7 +30,7 @@ if (!mongoURL) {
 
 // Configurando a conexão com o MongoDB
 var mongoose = require('mongoose');
-mongoose.connect(mongoURL, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(mongoURL);
 
 mongoose.Promise = global.Promise;
 const db = mongoose.connection;
