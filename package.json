@@ -8,10 +8,14 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "npm i express --save && npm i nodemon -g --save-dev && npm i mongoose --save && nodemon index mongodb+srv://guilherme237057:dados135@cluster0.atwgt.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+    "dev": "nodemon index.js",  // Apenas para desenvolvimento local
+    "start": "node index.js"  // Comando para rodar a aplicação em produção
   },
   "dependencies": {
     "express": "^4.21.2",
     "mongoose": "^8.13.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.19"  // Apenas para desenvolvimento local
   }
 }
