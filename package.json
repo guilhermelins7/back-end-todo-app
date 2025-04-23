@@ -8,14 +8,14 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon index.js",  // Apenas para desenvolvimento local
-    "start": "node index.js"  // Comando para rodar a aplicação em produção
+    "dev": "nodemon index.js",
+    "start": "node index.js"
   },
   "dependencies": {
     "express": "^4.21.2",
     "mongoose": "^8.13.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.19"  // Apenas para desenvolvimento local
+    "nodemon": "^2.0.19"
   }
 }
