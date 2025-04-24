@@ -1,4 +1,5 @@
 const express = require('express');
+const mongoose = require('mongoose');
 const app = express();
 
 app.use((req, res, next) => {
@@ -13,32 +14,28 @@ app.use((req, res, next) => {
 
 app.use(express.json());
 
-const PORT = process.env.PORT || 3000;  // Porta definida pela variável de ambiente
 const routes = require('./routes/routes');
 app.use('/api', routes);
 
-app.listen(PORT, () => {
-  console.log(`Server Started at ${PORT}`);
-});
-
 // Conectando ao MongoDB usando a variável de ambiente MONGO_URL
-var mongoURL = process.env.MONGO_URL;  // Usando variável de ambiente
+const mongoURL = process.env.MONGO_URL;
 if (!mongoURL) {
   console.error("MONGO_URL environment variable not set.");
-  process.exit(1);  // Encerra o processo caso não haja URL de conexão
+  process.exit(1);
 }
 
-// Configurando a conexão com o MongoDB
-var mongoose = require('mongoose');
-mongoose.connect(mongoURL);
-
 mongoose.Promise = global.Promise;
-const db = mongoose.connection;
 
-db.on('error', (error) => {
-  console.log('MongoDB Connection Error:', error);
-});
+// Conexão e inicialização do servidor
+mongoose.connect(mongoURL)
+  .then(() => {
+    console.log('Database Connected');
 
-db.once('connected', () => {
-  console.log('Database Connected');
-});
+    const PORT = process.env.PORT || 3000;
+    app.listen(PORT, () => {
+      console.log(`Server Started at ${PORT}`);
+    });
+  })
+  .catch((error) => {
+    console.error('MongoDB Connection Error:', error);
+  });
